@@ -37,6 +37,8 @@ export default defineConfig([
       '@stylistic/eol-last': ['error', 'always'],
       // No variables sin usar (TS)
       '@typescript-eslint/no-unused-vars': 'warn',
+
+      '@typescript-eslint/no-unused-expressions': 'off',
     },
   },
 ])
