@@ -28,7 +28,7 @@ export default defineConfig([
       // Comillas simples
       '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
       // Indentación de 2 espacios
-      '@stylistic/indent': ['error', 2],
+      // '@stylistic/indent': ['error', 2],
       // Espacios en llaves de objetos { foo }
       '@stylistic/object-curly-spacing': ['error', 'always'],
       // Sin trailing spaces
