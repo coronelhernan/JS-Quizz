@@ -1,4 +1,4 @@
-import { Card, Typography } from '@mui/material'
+import { Card, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import { useQuestionsStore } from './store/questions'
 import { type Question as QuestionType } from './types.d'
 import SyntaxHighLigther from 'react-syntax-highlighter'
@@ -12,6 +12,16 @@ const Question = ({ info }: { info: QuestionType }) => {
 			<SyntaxHighLigther language='javascript' style={monokai}>
 				{info.code}
 			</SyntaxHighLigther>
+
+      <List sx={{ bgcolor: '#333', textAlign: 'center' }} disablePadding>
+        {info.answers.map((answer, index) => (
+          <ListItem key={index} disablePadding divider>
+            <ListItemButton>
+              <ListItemText primary={answer} sx={{ textAlign: 'center' }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </Card>
   )
 }
