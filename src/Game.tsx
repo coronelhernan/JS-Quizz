@@ -1,5 +1,6 @@
-import { Card, Typography, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Card, Typography, List, ListItem, ListItemButton, ListItemText, IconButton, Stack } from '@mui/material'
 import { useQuestionsStore } from './store/questions'
+import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { type Question as QuestionType } from './types.d'
 import SyntaxHighLigther from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -55,12 +56,24 @@ const Question = ({ info }: { info: QuestionType }) => {
 export const Game = () => {
   const questions = useQuestionsStore(state => state.questions)
   const currentQuestion = useQuestionsStore(state => state.currentQuestion)
-  console.log(questions)
+  const goNextQuestion = useQuestionsStore(state => state.goNextQuestion)
+  const goPreviousQuestion = useQuestionsStore(state => state.goPreviousQuestion)
 
   const questionInfo = questions[currentQuestion]
 
   return (
     <>
+      <Stack direction='row' sx={{ gap: 2, alignItems: 'center', justifyContent: 'center' }}>
+        <IconButton onClick={goPreviousQuestion} disabled={currentQuestion === 0}>
+          <ArrowBackIosNew />
+        </IconButton>
+
+        {currentQuestion + 1} / {questions.length}
+
+        <IconButton onClick={goNextQuestion} disabled={currentQuestion >= questions.length - 1}>
+          <ArrowForwardIos />
+        </IconButton>
+      </Stack>
       <Question info={questionInfo} />
     </>
   )
