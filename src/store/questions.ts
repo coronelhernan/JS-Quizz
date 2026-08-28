@@ -7,10 +7,12 @@ const FETCH_URL = 'http://localhost:5173/data.json'
 interface State {
   questions: Question[];
   currentQuestion: number;
+  showResults: boolean;
   fetchQuestions: (limit: number) => Promise<void>
   selectAnswer: (questionId: number, answerIndex: number) => void
   goNextQuestion: () => void
   goPreviousQuestion: () => void
+  closeResults: () => void
   reset: () => void
 }
 
@@ -18,6 +20,7 @@ export const useQuestionsStore = create<State>()(persist((set, get) => {
   return {
     questions: [],
     currentQuestion: 0,
+    showResults: false,
 
     fetchQuestions: async (limit: number) => {
       const response = await fetch(FETCH_URL)
@@ -46,8 +49,11 @@ export const useQuestionsStore = create<State>()(persist((set, get) => {
         userSelectedAnswer: answerIndex
       }
 
+      // Verificamos si con esta respuesta ya se completaron todas las preguntas
+      const allAnswered = newQuestions.every(q => q.userSelectedAnswer != null)
+
       // Actualizamos el estado
-      set({ questions: newQuestions })
+      set({ questions: newQuestions, showResults: allAnswered })
     },
 
     goNextQuestion: () => {
@@ -68,10 +74,18 @@ export const useQuestionsStore = create<State>()(persist((set, get) => {
       }
     },
 
+    closeResults: () => {
+      set({ showResults: false })
+    },
+
     reset: () => {
-      set({ currentQuestion: 0, questions: [] })
+      set({ currentQuestion: 0, questions: [], showResults: false })
     }
   }
 }, {
-  name: 'questions'
+  name: 'questions',
+  partialize: (state) => ({
+    questions: state.questions,
+    currentQuestion: state.currentQuestion
+  })
 }))
