@@ -4,6 +4,7 @@ import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { type Question as QuestionType } from './types.d'
 import SyntaxHighLigther from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { ResultsModal } from './components/ResultsModal'
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
   const { userSelectedAnswer, correctAnswer } = info
@@ -81,6 +82,7 @@ export const Game = () => {
         </Stack>
       </Stack>
       <Question info={questionInfo} />
+      <ResultsModal />
     </>
   )
 }
