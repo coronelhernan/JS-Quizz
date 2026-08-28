@@ -1,4 +1,4 @@
-import { Card, Typography, List, ListItem, ListItemButton, ListItemText, IconButton, Stack } from '@mui/material'
+import { Card, Typography, List, ListItem, ListItemButton, ListItemText, IconButton, Stack, Button } from '@mui/material'
 import { useQuestionsStore } from './store/questions'
 import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material'
 import { type Question as QuestionType } from './types.d'
@@ -58,21 +58,27 @@ export const Game = () => {
   const currentQuestion = useQuestionsStore(state => state.currentQuestion)
   const goNextQuestion = useQuestionsStore(state => state.goNextQuestion)
   const goPreviousQuestion = useQuestionsStore(state => state.goPreviousQuestion)
+  const reset = useQuestionsStore(state => state.reset)
 
   const questionInfo = questions[currentQuestion]
 
   return (
     <>
-      <Stack direction='row' sx={{ gap: 2, alignItems: 'center', justifyContent: 'center' }}>
-        <IconButton onClick={goPreviousQuestion} disabled={currentQuestion === 0}>
-          <ArrowBackIosNew />
-        </IconButton>
+      <Stack direction="column" sx={{ gap: 2, alignItems: 'center', justifyContent: 'center', marginTop: 4 }}>
+        <Button sx={{ bgcolor: '#333', textAlign: 'center', color: '#fff', padding: '10px' }}
+          onClick={() => reset()}>
+            Reiniciar juego
+        </Button>
+        <Stack direction="row" sx={{ gap: 2, alignItems: 'center', justifyContent: 'center' }}>
+          <IconButton onClick={goPreviousQuestion} disabled={currentQuestion === 0}>
+            <ArrowBackIosNew />
+          </IconButton>
+            {currentQuestion + 1} / {questions.length}
 
-        {currentQuestion + 1} / {questions.length}
-
-        <IconButton onClick={goNextQuestion} disabled={currentQuestion >= questions.length - 1}>
-          <ArrowForwardIos />
-        </IconButton>
+          <IconButton onClick={goNextQuestion} disabled={currentQuestion >= questions.length - 1}>
+            <ArrowForwardIos />
+          </IconButton>
+        </Stack>
       </Stack>
       <Question info={questionInfo} />
     </>
