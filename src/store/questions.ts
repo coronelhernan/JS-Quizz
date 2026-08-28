@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { type Question } from '../types.d'
+import { persist } from 'zustand/middleware'
 
 const FETCH_URL = 'http://localhost:5173/data.json'
 
@@ -10,9 +11,10 @@ interface State {
   selectAnswer: (questionId: number, answerIndex: number) => void
   goNextQuestion: () => void
   goPreviousQuestion: () => void
+  reset: () => void
 }
 
-export const useQuestionsStore = create<State>((set, get) => {
+export const useQuestionsStore = create<State>()(persist((set, get) => {
   return {
     questions: [],
     currentQuestion: 0,
@@ -65,5 +67,11 @@ export const useQuestionsStore = create<State>((set, get) => {
         set({ currentQuestion: previousQuestion })
       }
     },
+
+    reset: () => {
+      set({ currentQuestion: 0, questions: [] })
+    }
   }
-})
+}, {
+  name: 'questions'
+}))
