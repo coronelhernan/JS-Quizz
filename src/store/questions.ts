@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { type Question } from '../types.d'
 import { persist } from 'zustand/middleware'
 
-const FETCH_URL = 'http://localhost:5173/data.json'
+const FETCH_URL = '/data.json'
 
 interface State {
   questions: Question[];
