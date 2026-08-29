@@ -31,4 +31,4 @@ JS Quiz plantea una serie de preguntas con fragmentos de código JavaScript y cu
 
 ## Créditos
 
-Proyecto construido durante el curso de React de [midudev](https://www.youtube.com/@midudev), como parte de la práctica del [playlist de React](https://www.youtube.com/playlist?list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29).
+Proyecto construido durante el curso de React de [midudev](https://github.com/midudev), siguiendo la práctica de la playlist [Curso de React](https://www.youtube.com/playlist?list=PLUofhDIg_38q4D0xNWp7FEHOTcZhjWJ29) en YouTube.

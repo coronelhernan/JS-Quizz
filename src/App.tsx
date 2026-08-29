@@ -22,7 +22,7 @@ function App() {
         >
           <JavaScriptLogo />
           <Typography variant="h2" component="h1">
-            JavaScript Quizz
+            JavaScript Quiz
           </Typography>
         </Stack>
 
